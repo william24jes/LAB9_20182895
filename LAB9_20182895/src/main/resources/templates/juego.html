@@ -13,44 +13,49 @@
             <h2>Juego de personajes movedizos</h2>
             <div class="form-group">
                 <label for="personajes">Ingrese el número de personajes:</label>
-                <input  id="personajes" class="form-control" type="number" autofocus >
+                <input id="personajes" class="form-control" type="number" autofocus>
             </div>
             <br><br>
-
             <div class="form-group">
                 <label for="metro">Ingrese el tamaño de la pista (m):</label>
                 <input id="metro" class="form-control" type="number" autofocus>
             </div>
+            <div class="invalid-feedback" style="display:none;margin-bottom: 10px">
+                Debe ingresar entre 3 y 5 personajes y un tamaño de pista entre 4 y 8
+            </div>
             <br><br>
-
-
-
-            <button type="submit" class="btn btn-primary">Ingresar personaje</button>
-
+            <button style="margin-bottom: 10px" type="submit" class="btn btn-primary">Ingresar personaje</button>
         </form>
+            <div style="justify-content: center;text-align:center;margin-left: 15px;background-color: aqua;height: 200px;width: 200px">
+                <img style="height: 100px;width: 100px" src="robot.png">
+                <input style="margin-bottom: 10px" type="text">
+                <button type="submit" class="btn btn-success">Seleccionar personaje</button>
+
+            </div>
+
+
 
         <script>
+            $(document).ready(function() {
+                $("form").submit(function(event) {
+                    event.preventDefault();
 
-            $("form").submit(function (event){
-                event.preventDefault();
+                    var personajes = parseInt($("#personajes").val());
+                    var metro = parseInt($("#metro").val());
 
-                var personajes=$("#personajes").val;
-                var metro=$("#metro").val;
+                    if (personajes < 2 || personajes > 6) {
+                        $(".invalid-feedback").show(500).delay(1000).hide(500);
+                        return;
+                    }
 
-                if (personajes<6 || personajes>2){
-                    return ;
-                }else{
-                    $(".invalid-feedback").show(500).delay(1000).hide(500);
-                }
+                    if (metro < 3 || metro > 9) {
+                        $(".invalid-feedback").show(500).delay(1000).hide(500);
+                        return;
+                    }
 
-
-                if (metro<9 || metro>3){
-                    return;
-                }else{
-                    $(".invalid-feedback").show(500).delay(1000).hide(500);
-                }
+                    this.submit();
+                });
             });
-
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
